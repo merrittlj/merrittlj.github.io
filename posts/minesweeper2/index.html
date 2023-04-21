@@ -2,31 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title> - Lucas Merritt&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta property="og:title" content="" />
-<meta property="og:description" content="[
-](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)[nullOverload](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)Follow
-Aug 14, 2022
-·10 min read
-Reversing and Patching Minesweeper Part 2 — Advanced Modifications Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
-We do a little trolling.
-If you haven’t read the second article in this series, click here." />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reversing and Patching Minesweeper Part 2 -- Advanced Modifications - Lucas Merritt&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Reversing and Patching Minesweeper Part 2 -- Advanced Modifications" />
+<meta property="og:description" content="Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
+We do a little trolling. Going back to the Part 1 As a little refresher, in the second article we searched through Minesweeper’s code, and found where mines are randomly created, and where the timer started ticking." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://merrittlj.github.io/posts/minesweeper2/" /><meta property="article:section" content="posts" />
-
-
+<meta property="article:published_time" content="2022-08-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-14T00:00:00+00:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="[
-](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)[nullOverload](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)Follow
-Aug 14, 2022
-·10 min read
-Reversing and Patching Minesweeper Part 2 — Advanced Modifications Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
-We do a little trolling.
-If you haven’t read the second article in this series, click here."/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
-
-	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/normalize.css" />
+<meta name="twitter:title" content="Reversing and Patching Minesweeper Part 2 -- Advanced Modifications"/>
+<meta name="twitter:description" content="Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
+We do a little trolling. Going back to the Part 1 As a little refresher, in the second article we searched through Minesweeper’s code, and found where mines are randomly created, and where the timer started ticking."/>
+<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/main.css" />
 
 	
@@ -52,87 +40,101 @@ If you haven’t read the second article in this series, click here."/>
 
 
 		<div class="post-header">
-			<h1 class="title"></h1>
-			<div class="meta">Posted at &mdash; Jan 1, 0001</div>
+			<h1 class="title">Reversing and Patching Minesweeper Part 2 -- Advanced Modifications</h1>
+			<div class="meta">Posted at &mdash; Aug 14, 2022</div>
 		</div>
 
 		<div class="markdown">
-			<p>[<img src="https://miro.medium.com/v2/resize:fill:96:96/1*_kMjwaSnMhdMcqUv-RC8Hg.jpeg" alt="nullOverload"></p>
-<p>](<a href="https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)%5BnullOverload%5D(https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)Follow">https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)[nullOverload](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)Follow</a></p>
-<p>Aug 14, 2022</p>
-<p>·10 min read</p>
-<h1 id="reversing-and-patching-minesweeper-part-2--advanced-modifications">Reversing and Patching Minesweeper Part 2 — Advanced Modifications</h1>
-<p>Hello readers, and welcome to the <strong>third</strong> article in this series. In this article, we will be using our <strong>knowledge</strong> of Minesweeper’s code to make more <strong>advanced</strong> modifications, such as making <strong>all</strong> of the tiles mines.</p>
-<p>We do a little trolling.</p>
-<p>If you haven’t read the <strong>second</strong> article in this series, click <a href="https://medium.com/@lucas.j.merritt/reversing-and-patching-minesweeper-part-1-installation-and-basic-modification-5721ee90d610"><strong>here</strong></a>.</p>
-<h1 id="going-back-to-the-part-1">Going back to the Part 1</h1>
+			<p>Hello readers, and welcome to the <strong>third</strong> article in this series. In this article, we will be using our <strong>knowledge</strong> of Minesweeper’s code to make more <strong>advanced</strong> modifications, such as making <strong>all</strong> of the tiles mines.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweep2title.png" alt=""></p>
+<h6 id="_we-do-a-little-trolling_"><em>We do a little trolling.</em></h6>
+<h3 id="going-back-to-the-part-1"><strong>Going back to the Part 1</strong></h3>
 <p>As a little <strong>refresher</strong>, in the <strong>second</strong> article we searched through Minesweeper’s <strong>code</strong>, and found where mines are <strong>randomly</strong> created, and where the timer started <strong>ticking</strong>. Unfortunately, the spot where mines are created <strong>wasn’t</strong> very useful at the time, but now this helps us greatly as we <strong>don’t</strong> have to find where we need to patch, we only need to find <strong>what</strong> to patch.</p>
-<h1 id="looking-further-into-the-code"><strong>Looking further into the code</strong></h1>
-<p>The <strong>decompiled</strong> code where mines are randomly created.</p>
-<h2 id="using-what-we-know">Using what we know</h2>
+<h3 id="looking-further-into-the-code"><strong>Looking further into the code</strong></h3>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler4.png" alt=""></p>
+<h6 id="_the-decompiled-code-where-mines-are-randomly-created_"><em>The <strong>decompiled</strong> code where mines are randomly created.</em></h6>
+<h3 id="using-what-we-know"><strong>Using what we know</strong></h3>
 <p>As we can see, when we were looking for when the <strong>sound</strong> was played, we found where mines are <strong>created</strong>. The function that the <strong>selected</strong> variable is <strong>initialized from</strong> returns a <strong>random</strong> variable, so we can assume <strong>iVar1</strong> and <strong>iVar2</strong> are <strong>both</strong> random numbers. In the <strong>next condition</strong>, we can see that both are used, most likely to randomly choose if a square should be a mine or not. This is further <strong>confirmed</strong> through the code <strong>below</strong>, as it <strong>subtracts</strong> a number(most likely how many more mines need to be randomly placed).</p>
-<h2 id="organization-and-readability">Organization and readability</h2>
+<h3 id="organization-and-readability"><strong>Organization and readability</strong></h3>
 <p>To make sure we can keep <strong>track</strong> of things throughout the complex <strong>process</strong>, we can set a <strong>pre-comment</strong>(one that shows <strong>before</strong> the code) to quickly write things down. These <strong>save</strong> to the project, so you can have them even the next time you start the project up. We can either <strong>right click</strong> on a line in the Assembly code, or do the <strong>same</strong> in the decompiled code. From there we go to <strong><em>Comments -&gt; Set Pre Comment…</em></strong> and then type in what we want to write down. For the code we found, we can simply write <strong>“Decreases mine count.”</strong>.</p>
 <p>To further <strong>improve</strong> readability, we can(<strong>cosmetically</strong>) change the variable name through <strong>right clicking</strong> the variable in either code, then pressing <strong><em>Rename Global</em></strong>, or by <strong>highlighting</strong> the variable then pressing <strong>L</strong>. Our final line of code that decreases the variable will look similar to below.</p>
-<p>That looks much better!</p>
-<h2 id="testing-the-variables">Testing the variables</h2>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler5.png" alt=""></p>
+<h6 id="_that-looks-much-better_"><em>That looks much better!</em></h6>
+<h3 id="testing-the-variables"><strong>Testing the variables</strong></h3>
 <p>Setting a <strong>breakpoint</strong> under the code that <strong>decreases</strong> the mine count left, we can see that once we start a <strong>beginner</strong> game and <strong>count</strong> every time it hits the breakpoint, it amounts to <strong>10</strong>. If we <strong>track</strong> the address that is being decreased whilst clicking on the breakpoints, we can see it going down from 10–9, 9–8, etc. If we <strong>disable</strong> the breakpoint and still track the address, we can see it at the <strong>current</strong> mine count for the board, so we can safely assume that the amount left of mines to be placed gets <strong>reset</strong> once <strong>all</strong> of them have been placed.</p>
-<h2 id="our-testing-results">Our testing results</h2>
+<h3 id="our-testing-results"><strong>Our testing results</strong></h3>
 <p>Now that we have found the mine count left <strong>variable</strong>, we can find where it gets set, and change that to <strong>enough</strong> mines to <strong>fill</strong> up the entire board. If we find the <strong>write</strong> references to the mine count, we can change it when we find the code that we think most likely sets it.</p>
 <p>Ah, if we looked <strong>further</strong> into the function code, we would have realized that <strong>all</strong> of the references are all in it! <strong>First</strong>, there is a line of code that <strong>sets</strong> the mine count to a variable(most likely the starting mine count, that doesn’t change), then there is the line that <strong>decreases</strong>, and then there is the same line of code that sets the mine count yet <strong>again</strong>. Earlier, we saw the mine count decreasing when the breakpoint was hit, yet it <strong>appeared</strong> to stay <strong>consistent</strong> the whole time <strong>without</strong> the breakpoints. We can see that mine count left variable is set to the <strong>non-changing</strong> mine count, it is <strong>iterated</strong> through the ensure that <strong>all</strong> mines are placed, then it is <strong>reset</strong> back to the original mine count. We can do some <strong>formatting</strong> to the chunk of code in the function to make it look much <strong>better</strong>, making the end result look something like below.</p>
-<p>Now it’s getting somewhat readable.</p>
-<h2 id="testing-the-starting-mine-count">Testing the starting mine count</h2>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler6.png" alt=""></p>
+<h6 id="_now-its-getting-somewhat-readable_"><em>Now it’s getting somewhat readable.</em></h6>
+<h3 id="testing-the-starting-mine-count"><strong>Testing the starting mine count</strong></h3>
 <p>The only downside to improving the appearance is that now instead of easily tracking variables in <strong>Cheat Engine</strong> by adding the address using the name, now we have to <strong>double click</strong> on the variable, and <strong>copy</strong> the address from there. Anyways, we can easily head back to the code to continue through clicking the back arrow at the top, or pressing <strong><em>ALT+LEFT</em></strong>. We can copy the address of our starting mine count variable, appropriately named <strong>starting_mine_count</strong>, then put that address in <strong>Cheat Engine</strong> and re-enable the breakpoints.</p>
-<p>I changed the descriptions for clarity(<strong>CTRL+ENTER).</strong></p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce3.png" alt=""></p>
+<h6 id="_i-changed-the-descriptions-for-clarityctrlenter_"><em>I changed the descriptions for clarity(<strong>CTRL+ENTER).</strong></em></h6>
 <p>Now, we have the <strong>starting</strong> mine count variable. While this could be changed to set the mine count to what we desire, due to the <strong>uncertainty</strong> of the code we will have to take a <strong>different</strong> approach.</p>
-<h1 id="patching-the-mine-count"><strong>Patching the mine count</strong></h1>
+<h3 id="patching-the-mine-count"><strong>Patching the mine count</strong></h3>
 <p>Onto the patching! Even though patching the starting mine count <strong>might</strong> be useful, it would be easier to just <strong>directly</strong> change the mine count when it is set, as we don’t know how the starting mine count might be changed or taken into account <strong>after</strong> we change it.</p>
-<p>The Assembly setting the mine count.</p>
-<h2 id="going-through-the-code">Going through the code</h2>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraassembly1.png" alt=""></p>
+<h6 id="_the-assembly-setting-the-mine-count_"><em>The Assembly setting the mine count.</em></h6>
+<h3 id="going-through-the-code"><strong>Going through the code</strong></h3>
 <p>As you can see above, the <strong>Assembly</strong> sets <strong>EAX</strong> to the <strong>starting</strong> mine count, and then sets the <strong>mine</strong> count to <strong>EAX</strong>. For <strong>simplicity</strong>(and not to waste any <strong>space</strong>) we can change <strong>EAX</strong>, rather then setting the mine count to a <strong>different</strong> value.</p>
-<h2 id="what-do-we-patch-it-to">What do we patch it to?</h2>
+<h3 id="what-do-we-patch-it-to"><strong>What do we patch it to?</strong></h3>
 <p>Since the board size of a <strong>Beginner</strong> board is a total of <strong>9x9</strong>, for now(not worrying about other sizes) we can simply <strong>patch</strong> the instruction to set the starting mine count to <strong>81</strong>, or <strong>80</strong> if you want to <strong>guarantee</strong> a first click not a mine, but the second is(due to Minesweeper moving mines to make your first click not a mine).</p>
 <p>As you can’t patch the decompiled code <strong>directly</strong>, you have to do it through the <strong>Assembly</strong>. Even though the decompiled code looks complex, in Assembly all we have to do is modify <strong>EAX</strong>. In hex, <strong>81</strong> is represented as <strong>51</strong>. To <strong>prove</strong> our theory correct, we don’t have to <strong>calculate</strong> how much mines we need, for now we will <strong>only</strong> worry about the beginner board.</p>
 <p>Now armed with the knowledge of what to do, we can simply now replace <strong>EAX</strong> in the instruction with <strong>0x51</strong>(0x indicates that it is in hex). If we visit the <strong>Bytes</strong> window, we can see that as <strong>0x51</strong> is less bytes then the before <strong>EAX</strong>, so we have some free space.</p>
-<p>Not much, but maybe useful later.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidrahex.png" alt=""></p>
+<h6 id="_not-much-but-maybe-useful-later_"><em>Not much, but maybe useful later.</em></h6>
 <p>Now that we have patched it, it should be working perfectly fine, but on run, you should see something very different.</p>
-<p>All of our clicks are blank!</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweepblank.png" alt=""></p>
+<h6 id="_all-of-our-clicks-are-blank_"><em>All of our clicks are blank!</em></h6>
 <p>Doing more <strong>research</strong> into this, and we come up with a very important rule that we were forgetting <strong>earlier</strong>. We can look further into this behavior in <a href="https://web.archive.org/web/20180618103640/http://www.techuser.net/mineclick.html"><strong>this</strong></a> article. In the end, when the <strong>first</strong> click is a mine, it <strong>moves</strong> it to somewhere <strong>without</strong> a mine. However, since there is <strong>no</strong> spots <strong>without</strong> mines, we have a weird state where <strong>all</strong> tiles are mines, but <strong>aren’t</strong> at the same time. Hopefully there is code somewhere that we can easily <strong>find</strong>, and then <strong>disable</strong> this functionality to <strong>guarantee</strong> a mine click every time.</p>
-<h2 id="looking-for-the-first-click-mine-prevention">Looking for the first click mine prevention</h2>
+<h3 id="looking-for-the-first-click-mine-prevention"><strong>Looking for the first click mine prevention</strong></h3>
 <p>As <strong>Minesweeper</strong> has to <strong>eventually</strong> let you click on a mine, there has to be a variable <strong>somewhere</strong> where it tracks when you can click on a mine, and when you can’t(such as on the first click). As we want this variable to work <strong>more</strong> then <strong>once</strong>, we need to <strong>reset</strong> it when a new game gets <strong>started</strong>. We already have found where a new game gets started, we can start looking there.</p>
-<p>Interesting…</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler7.png" alt=""></p>
+<h6 id="_interesting_"><em>Interesting…</em></h6>
 <p>The variable <strong>DAT_010057a4</strong> looks interesting, so lets see if we can track it in <strong>Cheat Engine</strong>. If we go to the <strong>Beginner</strong> board and test it their, we don’t see it increase. However, as you may realize, this is <strong>misleading</strong>. The variable most likely gets set if you <strong>successfully</strong> click on a square, instead of clicking on a square and then the the mine getting <strong>moved</strong>, to the same square(with no free squares). While it may sound confusing right now, we can confirm this theory through starting a <strong>Custom</strong> board, and then tracking the variable after a successful click. This number jumps up fast, and from this we can infer that the variable is how many squares are cleared.</p>
 <p>We can look into the <strong>references</strong> for this, as it it most likely used to <strong>check</strong> for the first click. Since we haven’t cleared any mines <strong>yet</strong>, the value is <strong>0</strong>, being easy to track in the code.</p>
-<p>That is exactly what we are looking for!</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler8.png" alt=""></p>
+<h6 id="_that-is-exactly-what-we-are-looking-for_"><em>That is exactly what we are looking for!</em></h6>
 <p>To finally confirm this further, we can start a new <strong>Beginner Game</strong>, set the value to <strong>1</strong>(or any other value <strong>above</strong> 0), then click.</p>
-<p>Yes!</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweepbeginner.png" alt=""></p>
+<h6 id="_yes_"><em>Yes!</em></h6>
 <p>We got it! When we set the variable to a value above <strong>0</strong>, it bypasses the first click check! Are only problem now, is we have to scale the mines according to board size. We don’t want to focus on <strong>Custom</strong> boards for now, as it seems like a bit of a waste of time, and they most likely use different variables anyways.</p>
-<h2 id="patching-the-variable">Patching the variable</h2>
+<h3 id="patching-the-variable"><strong>Patching the variable</strong></h3>
 <p>Before we should start experimenting with board <strong>size</strong> and <strong>dynamic</strong> mine counts, we should first <strong>set</strong> this variable so we don’t have to use <strong>Cheat Engine</strong> every time to test it. We can simply change the following:</p>
-<p>I changed the variable name for appearance.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler9.png" alt=""></p>
+<h6 id="_i-changed-the-variable-name-for-appearance_"><em>I changed the variable name for appearance.</em></h6>
 <p>From <strong>EDI</strong>, to <strong>1</strong>(or anything <strong>higher</strong> then 0). We have some <strong>free</strong> space after this, that we can patch with <strong>NOP</strong>s to prevent any weird behavior. Exporting and running this, we can see that everything has went well, so now we can <strong>start</strong> working on changing the mine count <strong>depending</strong> on the board.</p>
-<h2 id="finding-height-and-width-variables">Finding height and width variables</h2>
+<h3 id="finding-height-and-width-variables"><strong>Finding height and width variables</strong></h3>
 <p>To start off, we need to look for a variable that controls board size. Since it is most likely used in calculations, it would make sense to have two variables to track width and height of the board. We can easily find these using <strong>Cheat Engine</strong>, and scanning for the height and width while changing the board size. We can do the first scan for 9, then change it to a <strong>Intermediate</strong> Board and simply scroll through the list to see that changed.</p>
-<p>Only 4 changed.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce4.png" alt=""></p>
+<h6 id="_only-4-changed_"><em>Only 4 changed.</em></h6>
 <p>We can sort out which is width and height through making <strong>Expert</strong> boards, as they are 16 tall and 30 wide.</p>
-<p>Changed descriptions.</p>
-<h2 id="making-the-mine-count-dynamic">Making the mine count dynamic</h2>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce5.png" alt=""></p>
+<h6 id="_changed-descriptions_"><em>Changed descriptions.</em></h6>
+<h3 id="making-the-mine-count-dynamic"><strong>Making the mine count dynamic</strong></h3>
 <p>Conveniently, if you look into the function code that randomly places mines(the one we <strong>changed</strong>) you can see the following code towards the <strong>top</strong>:</p>
-<p>Those addresses look familiar.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler10.png" alt=""></p>
+<h6 id="_those-addresses-look-familiar_"><em>Those addresses look familiar.</em></h6>
 <p>Even better, in <strong>Assembly</strong>, the <strong>MUL</strong> instruction multiplies <strong>EAX</strong> and whatever you supply, and stores it in <strong>EAX</strong>; you can find the reference <a href="https://c9x.me/x86/html/file_module_x86_id_210.html"><strong>here</strong></a>. As we know from earlier, <strong>EAX</strong> is the mine count, which we hard coded to 81 for testing purposes. As we can simply use the instruction <strong>MUL ECX</strong> to set <strong>EAX</strong> to our desired mine count, we can replace all of space used by this instruction by pressing <strong>C</strong>, or right clicking and pressing <strong>Clear Code Bytes</strong>, and then changing all of the empty space to NOPs.</p>
-<p>That’s a good chunk of space!</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler11.png" alt=""></p>
+<h6 id="_thats-a-good-chunk-of-space_"><em>That’s a good chunk of space!</em></h6>
 <p>Now that we have some <strong>space</strong>, we can now replace the first <strong>instruction</strong> with <strong>MUL ECX</strong>, and then we should be done! However, we have one small(and fixable) problem. The code is pretty sloppy, so how the original mine count would be set is through <strong>directly</strong> setting it to something, rather then <strong>referencing</strong> it. It should be fine as <strong>EAX</strong> gets set earlier anyways, but another reason why it was set is because of the function above it.</p>
-<p>Why is it doing that?</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler12.png" alt=""></p>
+<h6 id="_why-is-it-doing-that_"><em>Why is it doing that?</em></h6>
 <p>While this may look confusing at first, we need to think about <strong>variables</strong> such as <strong>ECX</strong>, <strong>EAX</strong>, etc. They are used in many functions to store data, and it just happens that in the function above the mine count getting set, it <strong>changes</strong> around some of the variables.</p>
-<p>There’s our problem.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler13.png" alt=""></p>
+<h6 id="_theres-our-problem_"><em>There’s our problem.</em></h6>
 <p>In addition, it doesn’t reset the variables in the function, as normally after the function <strong>EAX</strong> gets overwritten anyways, but in this case we are <strong>multiplying</strong> it. Thankfully, this doesn’t appear to matter when it is executed, so we can move it behind the mine count getting set. Moving around a bit more to make sure everything <strong>works</strong> and <strong>NOP</strong>ing the <strong>free</strong> space, we end up with something like below:</p>
-<p>Note: Make sure when copying the call instruction that the <strong>correct</strong> hex is set.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler14.png" alt=""></p>
+<h6 id="_note-make-sure-when-copying-the-call-instruction-that-the-correct-hex-is-set_"><em>Note: Make sure when copying the call instruction that the <strong>correct</strong> hex is set.</em></h6>
 <p>This should all work, so now if we go ahead and export and run…</p>
-<p>Looks like we made the easiest game of Minesweeper, just flag all of the mines.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweepmines.png" alt=""></p>
+<h6 id="_looks-like-we-made-the-easiest-game-of-minesweeper-just-flag-all-of-the-mines_"><em>Looks like we made the easiest game of Minesweeper, just flag all of the mines.</em></h6>
 <p>We got it! Now, <strong>every</strong> click on every board is a <strong>mine</strong>, even <strong>Custom</strong> boards!</p>
-<h1 id="summary">Summary</h1>
+<h3 id="summary"><strong>Summary</strong></h3>
 <p>This was a long, and complicated article. We did a lot here, and I’m not sure if there is much more to modify with Minesweeper at least, but I’m planning to make many other articles on Reverse Engineering related things. Feel free to recommend any ideas going forth for the series, or any other thing I should write on.</p>
-<p>Thanks for reading, <a href="https://medium.com/@lucas.j.merritt"><strong><em>nullOverload</em></strong></a></p>
+<p>Thanks for reading, <a href="https://github.com/merrittlj"><strong><em>merrittlj</em></strong></a></p>
 
 		</div>
 

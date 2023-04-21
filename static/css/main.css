@@ -1,7 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Aleo&display=swap');
-
 body {
-    font-family: "Aleo", serif;
+    font-family: "Roboto Slab", serif;
     font-weight: 400;
     color: #333;
     line-height: 1.6;
@@ -9,7 +7,7 @@ body {
 }
 
 a, a:hover {
-    color: #aaa597;
+    color: #726953;
     text-decoration: none;
     word-break: break-word;
 }
@@ -66,9 +64,9 @@ blockquote {
     margin-left: 1rem;
     font-style: italic;
     font-size: 1.4rem;
-    font-family: "Aleo",serif;
+    font-family: "Roboto Slab",serif;
     border-left: 3px solid;
-    border-color: #aaa597;
+    border-color: #726953;
     padding-left: 20px;
 }
 
@@ -82,7 +80,7 @@ blockquote em {
 }
 
 a,a:hover {
-    color: #aaa597;
+    color: #726953;
     text-decoration: none
 }
 
@@ -91,7 +89,7 @@ a:hover {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    font-family: "Aleo",serif;
+    font-family: "Roboto Slab",serif;
     line-height: 1.2;
     color: #333;
     font-weight: 200;
@@ -303,7 +301,7 @@ pre code {
 }
 
 .post .draft-label {
-    color: #aaa597;
+    color: #726953;
     text-decoration: none;
     padding: 2px 4px;
     border-radius: 4px;
@@ -318,10 +316,10 @@ pre code {
 
 .post-tags .tags a {
     display: inline-block;
-    border: 1px solid #aaa597;
+    border: 1px solid #726953;
     border-radius: 4px;
     padding: 0px 6px;
-    color: #aaa597;
+    color: #726953;
     line-height: 20px;
     font-size: 12px;
     text-decoration: none;

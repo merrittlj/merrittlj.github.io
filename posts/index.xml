@@ -8,12 +8,23 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 15 Apr 2023 19:28:10 -0600</lastBuildDate><atom:link href="https://merrittlj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>New Blog</title>
+      <title>Welcome to my new blog</title>
       <link>https://merrittlj.github.io/posts/newblog/</link>
       <pubDate>Sat, 15 Apr 2023 19:28:10 -0600</pubDate>
       
       <guid>https://merrittlj.github.io/posts/newblog/</guid>
-      <description>Welcome to the my blog.</description>
+      <description>What are the older posts? You may notice that posts have been written before this one. I have ported my posts from Medium, as I greatly prefer the customizability and more professional manner of a blog using a static site generator, and I get to write posts in Markdown as well.
+My previous posts consider reverse engineering minesweeper for a end-product of forcing every cell in a board to contain a mine.</description>
+    </item>
+    
+    <item>
+      <title>Reversing and Patching Minesweeper Part 2 -- Advanced Modifications</title>
+      <link>https://merrittlj.github.io/posts/minesweeper2/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://merrittlj.github.io/posts/minesweeper2/</guid>
+      <description>Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
+We do a little trolling. Going back to the Part 1 As a little refresher, in the second article we searched through Minesweeper’s code, and found where mines are randomly created, and where the timer started ticking.</description>
     </item>
     
     <item>
@@ -34,21 +45,6 @@ Time for our first modification! Ghidra Installation Once you have navigated to 
       <guid>https://merrittlj.github.io/posts/minesweeper0/</guid>
       <description>Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be Reverse Engineering a basic, old Windows Minesweeper binary and creating custom patches for our desired functionality.
 This is going to be a fun series. My goal for this series There are many different reasons why I’m starting this series. However, in general, besides having fun, this is meant to be a well documented, easy introduction to Reverse Engineering binaries as a whole; and some of this knowledge can even be used outside of this topic.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://merrittlj.github.io/posts/minesweeper2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://merrittlj.github.io/posts/minesweeper2/</guid>
-      <description>[
-](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)[nullOverload](https://medium.com/@lucas.j.merritt?source=post_page-----87a2e327678d--------------------------------)Follow
-Aug 14, 2022
-·10 min read
-Reversing and Patching Minesweeper Part 2 — Advanced Modifications Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
-We do a little trolling.
-If you haven’t read the second article in this series, click here.</description>
     </item>
     
   </channel>
