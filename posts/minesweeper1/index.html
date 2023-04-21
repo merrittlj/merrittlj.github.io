@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reversing and Patching Minesweeper Part 1 -- Installation and Basic Modification - Lucas Merritt&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Reversing and Patching Minesweeper Part 1 -- Installation and Basic Modification" />
+<meta property="og:description" content="Hello readers, and welcome to the second article in this series. In this article, we will be installing Ghidra and setting up our project, then we will make some basic modifications to our target program. Grab a cup of coffee and be prepared to down it, because this is a long one.
+Time for our first modification! Ghidra Installation Once you have navigated to the link from the first article(you can also find it here), you will see the following page:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://merrittlj.github.io/posts/minesweeper1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-04T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reversing and Patching Minesweeper Part 1 -- Installation and Basic Modification"/>
+<meta name="twitter:description" content="Hello readers, and welcome to the second article in this series. In this article, we will be installing Ghidra and setting up our project, then we will make some basic modifications to our target program. Grab a cup of coffee and be prepared to down it, because this is a long one.
+Time for our first modification! Ghidra Installation Once you have navigated to the link from the first article(you can also find it here), you will see the following page:"/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/main.css" />
+
+	
+	<script src="https://merrittlj.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://merrittlj.github.io/">
+	<h1 class="site-title"><a href="https://merrittlj.github.io/">Lucas Merritt&#39;s Blog</a></h1>
+	<div class="site-description"><nav class="nav social">
+			<ul class="flat"></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Reversing and Patching Minesweeper Part 1 -- Installation and Basic Modification</h1>
+			<div class="meta">Posted at &mdash; Aug 4, 2022</div>
+		</div>
+
+		<div class="markdown">
+			<p>Hello readers, and welcome to the <strong>second</strong> article in this series. In this article, we will be installing <strong><em>Ghidra</em></strong> and setting up our project, then we will make some <strong>basic modifications</strong> to our target program. Grab a cup of coffee and be prepared to down it, because this is a long one.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweep1title.png" alt=""></p>
+<h6 id="time-for-our-first-modification">Time for our <strong>first modification</strong>!</h6>
+<h3 id="ghidra-installation">Ghidra Installation</h3>
+<p>Once you have navigated to the link from the <strong>first article</strong>(you can also find it <a href="https://github.com/NationalSecurityAgency/ghidra/releases"><strong>here</strong></a>), you will see the following page:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/latestghidrarelease.png" alt=""></p>
+<h6 id="the-latest-release-of-ghidra">The latest release of <strong>Ghidra</strong>.</h6>
+<p>After finding the latest release on the <strong>GitHub</strong> page, click on the <strong>first</strong> zip under <strong>Assets</strong>. Once downloaded, extract it using your preferred program. Keep in mind, you will need at least 1gb of space for extraction, and most likely more for other parts(projects, programs).</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidralocation.png" alt=""></p>
+<h6 id="it-is-recommended-to-extract-ghidra-to-a-folder-similar-to-this">It is recommended to extract <strong>Ghidra</strong> to a folder similar to this.</h6>
+<p>Now that <strong><em>Ghidra</em></strong> has been installed, you can run it using <strong><em>ghidraRun.bat</em></strong>, or similar on different operating systems.</p>
+<p><strong>Note:</strong> if any problems arise when installing, refer to the <strong>Ghidra’s Troubleshooting Section</strong>, found <a href="https://ghidra-sre.org/InstallationGuide.html#Troubleshooting"><strong>here</strong></a>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidrashortcut.png" alt=""></p>
+<h6 id="i-made-a-shortcut-on-my-desktop-for-easy-access">I made a shortcut on my <strong>Desktop</strong> for easy access.</h6>
+<h3 id="setting-up-our-first-project">Setting up our first project</h3>
+<p>We’re almost ready to start <strong>Reverse Engineering</strong> Minesweeper! Once <strong><em>Ghidra</em></strong> is open, it should look like this:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraprojectwindow.png" alt=""></p>
+<h6 id="now-we-need-to-create-a-project">Now we need to create a project.</h6>
+<p>Conveniently, <strong><em>Ghidra</em></strong>  uses a <strong>project-based system</strong>, rather than individual files, as <strong>many</strong> times you may be working with multiple files for your needs.</p>
+<p>To create a project, click on <strong><em>File -&gt; New Project…</em></strong>, or press <strong><em>CTRL+N</em></strong>(or any similar shortcuts depending on the operating system). First you will be asked if you want to create a <strong>Non-Shared Project</strong> or a <strong>Shared Project.</strong> For this series, as it is only us, we will be using a <strong>Non-Shared Project</strong>. However keep in mind, that <strong>Shared Projects</strong> can be handy for certain situations. If we click through, we will be asked where we want to put our project. For this series, I will use the folder I created for projects as seem in a image earlier, <strong>C:\Ghidra\Projects</strong>. Give it a name, and hit <strong>Finish</strong>!</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraprojectlocation.png" alt=""></p>
+<h6 id="the-final-step-in-our-project-creation-process">The final step in our project creation process.</h6>
+<p>Now that we have created the project, we need to <strong>add our files</strong>. For now, we will <strong>only</strong> be using one file, <strong>Winmine__XP.exe</strong> downloaded in the <strong>first</strong> article. We can import that through clicking <strong><em>File -&gt; Import File…</em></strong> or pressing <strong><em>I</em></strong><em>.</em> From there, navigate to where you downloaded Minesweeper, then click <strong>Select File To Import</strong>. You will get the following popup, and ensure everything looks correct, as seen below.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraimport.png" alt=""></p>
+<h6 id="the-import-dialogue">The import dialogue.</h6>
+<p>Once loaded in, you will see a <strong>file summary</strong> of the file you just imported. You can <strong>ignore</strong> this for now, as it can be opened up <strong>later</strong> again if needed.</p>
+<p>Time to open up the file! We can open it simply by double clicking the file under our current project. Once opened, the window will look something like this:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/analyzeimage.png" alt=""></p>
+<h6 id="low-image-quality-its-asking-if-you-want-to-analyze-the-file">Low image quality, it’s asking if you want to analyze the file.</h6>
+<p>You can select <strong>Yes</strong>, then click <strong>Analyze</strong>. We will be using <strong>default</strong> settings for now. You can see the progress in the <strong>bottom right</strong>, but it should be relatively <strong>fast</strong> because of how small the file is. You’ve now successfully setup your project! Next, we will be making a <strong>basic modification</strong>, through <strong>changing some of the sounds</strong> in the program, <strong>but first</strong> we need to find <strong>where the sounds are</strong>, and try and <strong>understand a bit more</strong> about the program.</p>
+<h3 id="learning-more-about-our-target-program">Learning more about our target program</h3>
+<p>First, we need to think about what we are looking for. As we are <strong>changing the sounds</strong>, we need to <strong>know what sounds play</strong>, and understand <strong>how they happened</strong>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/target.png" alt=""></p>
+<h6 id="now-we-get-to-play-minesweeper">Now we get to play Minesweeper!</h6>
+<p>After turning on sound through the <strong>Game</strong> tab, we can hear the following sounds when playing the game:</p>
+<ul>
+<li>A <strong>timer tick</strong> sound when the timer increases, <strong>which only happens once the user has clicked their first tile</strong>.</li>
+<li>A <strong>bomb explosion</strong> sound when… you lose through <strong>clicking on a mine</strong>.</li>
+<li>A funky <strong>win</strong> sound when you clear the board <strong>without touching any mines</strong>.</li>
+</ul>
+<p><strong>Now that we have established what we are looking for and how we get it</strong>, let’s do some brainstorming and then jump into the code.</p>
+<p>If you <strong>think</strong> about the game, you will notice that for it <strong>not to be repetitive</strong>, it needs some sort of <strong>randomness</strong> inside the <strong>mine placement</strong>, so you can’t memorize where they are. They most likely didn’t make their own random number engine, as using a widespread library is much easier.</p>
+<p>We don’t know it yet, but once you go into the code you will see that this program is written in C++. Upon searching up “<strong><em>c++ random</em></strong>” in a search engine, we can see that the first result is a page talking about the <strong>rand</strong> library, found <a href="https://cplusplus.com/reference/cstdlib/rand/"><strong>here</strong></a>. It looks a bit old, but we can see that the library named <strong>rand</strong> can be used for random numbers, and upon <strong>looking into other code examples</strong>, it seems to be pretty <strong>widespread</strong>.</p>
+<p>Since it looks like mines are <strong>generated randomly when a new game is made or when the first tile is clicked</strong>, and the <strong>timer starts ticking</strong> when the game starts, <strong>searching for this library</strong> in <strong><em>Ghidra</em></strong> could help us find a <strong>good area</strong> where we might find some sound <strong>related</strong> code.</p>
+<p>Upon opening up <strong><em>Ghidra</em></strong> again, we can see many things, but the place we are interested in mainly right now, is <strong>Symbol Tree</strong>, as this can show us <strong>functions</strong>, imported and exported <strong>DLLs</strong>, <strong>Labels</strong>, and <strong>more</strong>. Thankfully, instead of searching through each, we can use the <strong>Filter</strong> area below. Upon searching up <strong>rand</strong>, we can see two things under the <strong>MSVCRT</strong> DLL, as seen in the below image.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidrasymboltree.png" alt=""></p>
+<h6 id="yes-they-are-using-the-library-we-searched-up">Yes! They are using the library we searched up.</h6>
+<p>If we right click on <strong>rand</strong> we can see the following option <strong><em>Show references to</em></strong>. If we click on it, we will see the following window:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidrarandreferences.png" alt=""></p>
+<h6 id="you-can-also-press-ctrlshiftf">You can also press <strong>CTRL+SHIFT+F</strong>.</h6>
+<p>If we select the first reference, we can see the following code in the <strong>Decompiler</strong> window:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler.png" alt=""></p>
+<h6 id="hmm-what-could-it-all-mean">Hmm, what could it all mean?</h6>
+<p>If we go back to the earlier <strong>rand</strong> reference website, we can see the following example code:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/randexample.png" alt=""></p>
+<h6 id="looks-similar">Looks similar.</h6>
+<p>As we can see, a random number is generated through using “<strong>rand() % num</strong>”. As we can see in the decompiled code, <strong>iVar1</strong> is set to <strong>rand()</strong> and then it is divided by the provided parameter. As we can see, this function creates a random number using a provided one. We can look for times this function was referenced to by <strong>right clicking</strong> the function name, then clicking <strong>References</strong>, then clicking <strong>References to [function name]</strong>, or simply clicking on the function and then pressing <strong><em>CRTL+SHIFT+F</em></strong>.</p>
+<p>When looking under the <strong>references</strong>, there is <strong>only two</strong>, and they both seem to be coming from relatively the <strong>same area</strong>. Visiting said area will bring us to some weird code, that is hard to figure out exactly what it does.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler1.png" alt=""></p>
+<h6 id="the-decompiled-c-code">The decompiled <strong>C++</strong> code.</h6>
+<p>But not all hope is lost yet. We can whip out another tool downloaded earlier, <strong>Cheat Engine.</strong> Whilst it’s mainly used for game hacking, we can repurpose it for our needs, which is settings <strong>breakpoints</strong> in code. First, launch your <strong>Minesweeper executable</strong>, then open <strong>Cheat Engine</strong>. You can attach it to your Minesweeper <strong>process</strong> through clicking on the <strong>search icon</strong> in the <strong>top left</strong>, then searching through the <strong>process lis</strong>t to find one named <strong>similarly</strong> to our executable.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweepprocess.png" alt=""></p>
+<h6 id="our-minesweeper-process">Our <strong>Minesweeper</strong> process</h6>
+<p>Once you click <strong>Open</strong>, you are attached to the process. To add our address that we want to add a breakpoint to in the code, we need to add it under <strong>Add Address Manually</strong>. Find the address of the code we want to investigate in <strong><em>Ghidra</em></strong>, then click <strong>OK</strong>. If we right click on the address in the <strong>Address List</strong>, we can see an option to <strong>disassemble</strong> the <strong>memory region</strong> near this address.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/functionaddress.png" alt=""></p>
+<h6 id="our-address-that-we-want-to-look-into">Our <strong>address</strong> that we want to look into.</h6>
+<p>By doing this, we can see the Assembly instructions around our address, which match up with the ones from <strong><em>Ghidra</em></strong>. Once we get to the correct code, we can set a breakpoint through right clicking the line, then clicking <strong>Set Breakpoint</strong>. If a popup happens asking to attach debugger, click <strong>Yes</strong>. Now, if we play Minesweeper and start a new game, we will see it freeze, indicating a breakpoint was hit. If we navigate back to <strong>Cheat Engine</strong>, we can see options at the top of where we set the breakpoint. If we click run, we can see the breakpoint was hit again. If we click <strong>Run</strong> multiple times, it will eventually stop, and we can play our game. Through this, we can conclude that on game startup, it <strong>generates the mines</strong> then <strong>rather then on first click</strong>. No luck here.</p>
+<p>But <strong>don’t</strong> be discouraged! There is <strong>many other ways</strong> we can sift through the code. Anyways, this is still very <strong>helpful</strong>, as we now know <strong>where</strong> we have to modify if we want to <strong>change</strong> the mine count, the random placement, etc. Thinking <strong>back</strong> to the sound, the timer tick sound <strong>only</strong> starts when you <strong>first</strong> click on a tile. If we find when the timer tick sound <strong>starts</strong>, we might be able to change it <strong>then</strong>, or we could also try and find when the timer <strong>increases</strong>, as a sound is played then too. <strong>Cheat Engine</strong> can track variables, and even change them. If we go back to <strong>Cheat Engine</strong>, we can start our first search for the value of <strong>0</strong>, which is the timer value when we start a <strong>new</strong> game.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce1.png" alt=""></p>
+<h6 id="thats-a-lot-of-results">That’s a lot of results.</h6>
+<p>Since it would take <strong>forever</strong> to sort through all of the results, we can click on our first mine, increasing the timer. Since it would be <strong>too difficult</strong> to correctly time our search for when the timer is a specific value, we can change the <strong>scan type</strong> to <strong>Increased Value</strong>. <strong>Every time</strong> the timer increases, we can do <strong>another</strong> scan through clicking <strong>Next Scan</strong>. Soon the results will get low enough to just scroll through the addresses, and find the one that increases correctly with the timer.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce2.png" alt=""></p>
+<h6 id="we-found-it">We found it!</h6>
+<p>If we now add this to our <strong>address list</strong> through double clicking on the address, in the <strong>address list</strong> we can change it through right clicking the address, <strong><em>Change Record -&gt; Value</em></strong>. If we change it back to something like <strong>10</strong>, we can see the timer starts counting up from <strong>10</strong>. Now that we have correctly identified our timer variable, let’s search for it in our code.</p>
+<p>If we press <strong>G</strong> in our project or go to <strong><em>Navigation -&gt; Go To…</em></strong> we can input the address of our timer variable in it, and click <strong>OK</strong>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidravariable.png" alt=""></p>
+<h6 id="the-variable-inside-the-code">The variable inside the code.</h6>
+<p>As usual, we can search for <strong>references</strong> to it, through using the <strong>right click menu</strong> or shortcuts.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradatreferences.png" alt=""></p>
+<h6 id="where-to-go-first">Where to go first?</h6>
+<p>Since to modify a variable you have to <strong>write</strong> to it, we can select the different locations that <strong>write</strong> to it.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler2.png" alt=""></p>
+<h6 id="the-first-reference">The first reference.</h6>
+<p>When looking through it seems that the first <strong>write</strong> checks if a variable isn’t 0(which is most likely a variable checking if we started), then it checks if the current time is below <strong>999</strong>, because as for Minesweeper’s <strong>time display</strong>, it stops ticking at <strong>999</strong>, as that is the max amount of time it can display. We see that it increases our variable by <strong>1</strong>, then calls two functions. <strong>Double clicking</strong> on the first one returns a function with a bunch of hard to read code, but this is most likely <strong>not</strong> where it plays sound. If the developers were <strong>efficient</strong>, they would have <strong>one function</strong>, where <strong>multiple</strong> sounds could be played through an <strong>argument</strong>. The second function has a argument when it get’s called, so lets investigate it.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidradecompiler3.png" alt=""></p>
+<h6 id="yes-playsound">Yes! PlaySound!</h6>
+<p>We can see that it first checks if a variable is equal to <strong>3</strong>, which we don’t know. But most likely, this is just a variable checking if the game started or not. If we look further, we can see that it plays sound! If the inputted argument is <strong>1,</strong> it plays a specific sound, same for <strong>2</strong> and <strong>3</strong>! Now, all we have to do is to set a breakpoint in the earlier code to test the timer counting function. If we press <strong><em>ALT+LEFT</em></strong>, or press the <strong>back arrow</strong> in the top menu of buttons, we can go back to that spot, and mark down the address of where the function is <strong>called</strong>.</p>
+<p>We found the function, but we can’t see an address of the line of code in the <strong>Decompiler,</strong> so how do we find it?</p>
+<p>If we look through the function code in the main <strong>Listing</strong> window that shows <strong>Assembly Code</strong>, we can see the following code:</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraassembly.png" alt=""></p>
+<h6 id="the-function-call">The function call.</h6>
+<p>In <strong>Assembly</strong>, the instruction <strong>CALL</strong> basically just “calls” a function. If we want to supply an argument with the call, we will <strong>PUSH</strong> it first, as you can see above the <strong>CALL</strong>. We can see the address on the side, which we can then use in <strong>Cheat Engine</strong> to set a breakpoint, as explained earlier.</p>
+<p>Once we set the breakpoint at the address, we can see that whenever the timer increases, the breakpoint is hit, then once the breakpoint is stepped through, the sound is played. So now, we have figured out that when was pass <strong>1</strong> into the sound function, it is the timer tick. As we could see when looking at the sound function, <strong>2</strong> and <strong>3</strong> also played different sounds. To keep it <strong>simple</strong>, for this first modification, we will <strong>change</strong> the timer tick sound to a <strong>different</strong> one. As we can see, all we need to do is change <strong>one</strong> line of code, and we have an <strong>entirely different</strong> sound!</p>
+<p>Thankfully, as it pushes <strong>1</strong> instead of a variable, we have some <strong>available</strong> space to change this to whatever number we desire. However, if you <strong>don’t have enough space</strong> to add new code or change old pieces, you will have to make more space somewhere, jump to it, and jump back. You <strong>don’t</strong> have to <strong>worry</strong> about that now however, as we will <strong>learn</strong> that <strong>later</strong>, and it is <strong>not</strong> needed for our purposes.</p>
+<p>To patch a instruction, we can simply <strong>right click</strong> on the line of code, then press <strong>Patch Instruction</strong>, or hit <strong><em>CTRL+SHIFT+G</em></strong>. From there, we can change the hex value of <strong>1</strong>(0x1), to the hex value of <strong>2</strong>(0x2).</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidrapatching.png" alt=""></p>
+<h6 id="patching-the-instruction">Patching the instruction.</h6>
+<p>From there, you can press <strong>enter</strong> to apply the changes. Now that we have changed the instruction, we need to create a new executable. As it won’t change automatically, we have to make it ourselves in <strong><em>Ghidra</em></strong> through clicking <strong><em>File -&gt; Export Program</em></strong>, or pressing <strong>O</strong>. Make sure the format is <strong>PE</strong> so we can easily run it and that the output file is in the right location, then press <strong>OK</strong>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidraexport.png" alt=""></p>
+<h6 id="finally-we-finished">Finally, we finished!</h6>
+<p>Now if we run our patched executable, we can hear the <strong>win</strong> sound as the timer tick! It might get annoying fast, but we successfully patched our first program!</p>
+<h3 id="summary">Summary</h3>
+<p>Even though the thought process might seem <strong>difficult at first</strong> for patching a binary, with <strong>experience</strong> you can quickly recognize what functions do, and what you need to change.</p>
+<p>In the <strong>next article</strong>, we will be using our knowledge of the program and <strong>Reverse Engineering</strong> to rig the mine count to make <strong>every</strong> tile a mine.</p>
+<p>Thanks for reading, <a href="https://github.com/merrittlj"><strong><em>merrittlj</em></strong></a></p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+
+</body>
+</html>

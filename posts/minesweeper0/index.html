@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Reversing and Patching Minesweeper Part 0 -- Introduction - Lucas Merritt&#39;s Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Reversing and Patching Minesweeper Part 0 -- Introduction" />
+<meta property="og:description" content="Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be Reverse Engineering a basic, old Windows Minesweeper binary and creating custom patches for our desired functionality.
+This is going to be a fun series. My goal for this series There are many different reasons why I’m starting this series. However, in general, besides having fun, this is meant to be a well documented, easy introduction to Reverse Engineering binaries as a whole; and some of this knowledge can even be used outside of this topic." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://merrittlj.github.io/posts/minesweeper0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reversing and Patching Minesweeper Part 0 -- Introduction"/>
+<meta name="twitter:description" content="Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be Reverse Engineering a basic, old Windows Minesweeper binary and creating custom patches for our desired functionality.
+This is going to be a fun series. My goal for this series There are many different reasons why I’m starting this series. However, in general, besides having fun, this is meant to be a well documented, easy introduction to Reverse Engineering binaries as a whole; and some of this knowledge can even be used outside of this topic."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://merrittlj.github.io/css/main.css" />
+
+	
+	<script src="https://merrittlj.github.io/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<base href="https://merrittlj.github.io/">
+	<h1 class="site-title"><a href="https://merrittlj.github.io/">Lucas Merritt&#39;s Blog</a></h1>
+	<div class="site-description"><nav class="nav social">
+			<ul class="flat"></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Reversing and Patching Minesweeper Part 0 -- Introduction</h1>
+			<div class="meta">Posted at &mdash; Aug 2, 2022</div>
+		</div>
+
+		<div class="markdown">
+			<p>Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be <strong>Reverse Engineering</strong> a basic, old <strong>Windows Minesweeper binary</strong> and <strong>creating custom patches</strong> for our desired functionality.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/minesweep0title.png" alt=""></p>
+<h6 id="this-is-going-to-be-a-fun-series">This is going to be a fun series.</h6>
+<h3 id="my-goal-for-this-series"><strong>My goal for this series</strong></h3>
+<p>There are <strong>many</strong> different reasons why I’m starting this series. However, in general, besides <strong>having fun</strong>, this is meant to be a <strong>well documented, easy</strong> introduction to <strong>Reverse Engineering binaries</strong> as a whole; and <strong>some</strong> of this knowledge can even be <strong>used outside</strong> of this topic.</p>
+<h3 id="needed-resources"><strong>Needed Resources</strong></h3>
+<p>As <strong>Reverse Engineering</strong> is pretty complex in general, we will need a couple things to get started, such as:</p>
+<h3 id="your-target-program"><strong>Your target program</strong></h3>
+<p>For this series, we will use a simple <strong>Windows Minesweeper</strong> binary(found <a href="http://www.minesweeper.info/downloads/WinmineXP.html"><strong>here</strong></a>). We will be <strong>looking through</strong> and <strong>investigating</strong> the multiple functionalities of this program, and then we will <strong>apply patches</strong> to make it do what we desire.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/target.png" alt=""></p>
+<h6 id="our-target-program">Our target program</h6>
+<h3 id="your-favorite-reverse-engineering-tool"><strong>Your favorite Reverse Engineering Tool</strong></h3>
+<p>There is <strong>many</strong> awesome and incredibly useful programs out there for <strong>Reverse Engineering</strong>, but in this tutorial we will be using <strong><em>Ghidra</em></strong>, and <strong>very useful</strong> and popular tool developed by the <strong><em>NSA</em></strong>. It is <strong>free</strong>, and is seen to many as a <strong>strong competitor to <em>IDA Pro</em>, another(paid) extensive tool</strong>. You can download it <a href="https://github.com/NationalSecurityAgency/ghidra/releases"><strong>here</strong></a>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ghidra.png" alt=""></p>
+<h6 id="made-by-the-nsa-thats-how-you-know-it-will-be-good-credit-ghidra-sreorghttpsghidra-sreorgimagesghidra_1png">Made by the <strong>NSA</strong>! That’s how you know it will be good. Credit: <a href="https://ghidra-sre.org/images/GHIDRA_1.png"><strong>ghidra-sre.org</strong></a></h6>
+<h3 id="cheat-engine"><strong>Cheat Engine</strong></h3>
+<p><strong>Cheat Engine</strong> is useful for many things, mainly some of the features that <strong><em>Ghidra</em> doesn’t have</strong>. With Cheat Engine, if you think some code is doing something, you can easily <strong>test it using breakpoints</strong> and see what certain <strong>variables are</strong> as well, or you could track certain <strong>addresses</strong> and their <strong>value</strong> throughout execution. You can find it <a href="https://www.cheatengine.org/"><strong>here</strong></a>.</p>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/ce.png" alt=""></p>
+<h6 id="cheat-engine-with-windows-dark-mode"><strong>Cheat Engine</strong> with Windows dark mode.</h6>
+<h3 id="a-good-understanding-of-how-computers-work-at-a-low-leveland-how-to-operate-one-in-general"><strong>A good understanding of how computers work at a low level(and how to operate one in general)</strong></h3>
+<p>This can apply to <strong>many</strong> things. Having a <strong>solid understanding on how things are functioning</strong> greatly <strong>helps readability and flow</strong> when working on a program.</p>
+<p>For starters, you should have a <strong>basic understanding of Assembly</strong>, as well as <strong>coding</strong> in general. Keep note, that whilst the <strong>more you have experience</strong> with coding and Assembly <strong>the better off you will be</strong>, but <strong>to get started all you should need is a basic understanding</strong> of syntax and different operations(Such as <strong>mov</strong> or <strong>jmp</strong> in <strong>Assembly</strong>, or <strong>C++ project structure</strong>).</p>
+<p>There are <strong>many great places</strong> to learn either coding or Assembly on the World Wide Web, but some good places to look further into are:</p>
+<ul>
+<li>Learning Assembly: <a href="http://www.staroceans.org/kernel-and-driver/The.Art.of.Assembly.Language.2nd.Edition.pdf"><strong>The Art of Assembly Language(2nd Edition)</strong></a></li>
+<li>Learning C++: <a href="https://www.w3schools.com/cpp/default.asp"><strong>C++ Basics/Reference Guide By W3 Schools</strong></a></li>
+<li>Combining your knowledge with both: <a href="https://godbolt.org/"><strong>Godbolt Compiler Explorer</strong></a></li>
+<li>Going further with your knowledge: <a href="https://crackmes.one/"><strong>Crackme Practice</strong></a></li>
+</ul>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/peek.png" alt=""></p>
+<h6 id="a-peek-into-some-interesting-code-in-ghidra">A peek into some interesting code in <strong>Ghidra</strong>.</h6>
+<p><img src="https://github.com/merrittlj/merrittljblog/raw/main/assets/godbolt.png" alt=""></p>
+<h6 id="the-default-godboltorghttpsgodboltorg-webpage">The default <a href="https://godbolt.org/"><strong>godbolt.org</strong></a> webpage</h6>
+<h3 id="summary"><strong>Summary</strong></h3>
+<p><strong>Reverse Engineering is a exciting and challenging topic</strong>, with <strong>many possibilities</strong>. In this series, we are just <strong>touching the surface</strong> and patching a simple binary, but there is <strong>much more for you to learn and do</strong>.</p>
+<p><strong>In the next article</strong>, we will be installing <strong><em>Ghidra</em></strong>, and getting it up and running to start our project.</p>
+<p>Thanks for reading, <a href="https://github.com/merrittlj"><strong><em>merrittlj</em></strong></a></p>
+
+		</div>
+
+		<div class="post-tags">
+			
+				
+			
+		</div>
+		</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div> <a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+
+
+</body>
+</html>
