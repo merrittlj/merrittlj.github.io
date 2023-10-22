@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Lucas Merritt&#39;s Blog</title>
+    <title>Posts on </title>
     <link>https://merrittlj.github.io/posts/</link>
-    <description>Recent content in Posts on Lucas Merritt&#39;s Blog</description>
+    <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Apr 2023 19:28:10 -0600</lastBuildDate><atom:link href="https://merrittlj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Oct 2023 14:53:53 -0600</lastBuildDate><atom:link href="https://merrittlj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An argument for openness</title>
+      <link>https://merrittlj.github.io/posts/argumentforopenness/</link>
+      <pubDate>Sat, 14 Oct 2023 14:53:53 -0600</pubDate>
+      
+      <guid>https://merrittlj.github.io/posts/argumentforopenness/</guid>
+      <description>The idea of broad openness in all systems around us, while seemingly extreme, is what I believe is necessary in the future. Specifically, this article will discuss the software side of this topic, concerning proprietary applications and their impact, as well as the effectiveness of open source projects. While this is somewhat based in fact and observations from myself and others, it is important to preface this with the idea that this is my opinion and my thoughts on this topic, and this article is mainly exploratory into the philosophy of openness in technology and its impacts.</description>
+    </item>
+    
     <item>
       <title>Welcome to my new blog</title>
       <link>https://merrittlj.github.io/posts/newblog/</link>
