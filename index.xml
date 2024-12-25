@@ -4,57 +4,51 @@
     <title></title>
     <link>https://merrittlj.github.io/</link>
     <description>Recent content on </description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Oct 2023 14:53:53 -0600</lastBuildDate><atom:link href="https://merrittlj.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Dec 2024 20:21:48 -0700</lastBuildDate>
+    <atom:link href="https://merrittlj.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Raven Smartwatch - Design</title>
+      <link>https://merrittlj.github.io/posts/raven-design/</link>
+      <pubDate>Tue, 24 Dec 2024 20:21:48 -0700</pubDate>
+      <guid>https://merrittlj.github.io/posts/raven-design/</guid>
+      <description>Intro This is the first of multiple blog posts regarding a project I have been working on for the past few months. With this project (unlike previous projects) I have seriously attempted to plan, design, and document all aspects of the project during the phases of the project. In this post, I will discuss my thoughts on the design and planning of the project in its current stance. Posts regarding hardware, software, and UI/UX will follow shortly after this post.</description>
+    </item>
     <item>
       <title>An argument for openness</title>
       <link>https://merrittlj.github.io/posts/argumentforopenness/</link>
       <pubDate>Sat, 14 Oct 2023 14:53:53 -0600</pubDate>
-      
       <guid>https://merrittlj.github.io/posts/argumentforopenness/</guid>
       <description>The idea of broad openness in all systems around us, while seemingly extreme, is what I believe is necessary in the future. Specifically, this article will discuss the software side of this topic, concerning proprietary applications and their impact, as well as the effectiveness of open source projects. While this is somewhat based in fact and observations from myself and others, it is important to preface this with the idea that this is my opinion and my thoughts on this topic, and this article is mainly exploratory into the philosophy of openness in technology and its impacts.</description>
     </item>
-    
     <item>
       <title>Welcome to my new blog</title>
       <link>https://merrittlj.github.io/posts/newblog/</link>
       <pubDate>Sat, 15 Apr 2023 19:28:10 -0600</pubDate>
-      
       <guid>https://merrittlj.github.io/posts/newblog/</guid>
-      <description>What are the older posts? You may notice that posts have been written before this one. I have ported my posts from Medium, as I greatly prefer the customizability and more professional manner of a blog using a static site generator, and I get to write posts in Markdown as well.
-My previous posts consider reverse engineering minesweeper for a end-product of forcing every cell in a board to contain a mine.</description>
+      <description>What are the older posts? You may notice that posts have been written before this one. I have ported my posts from Medium, as I greatly prefer the customizability and more professional manner of a blog using a static site generator, and I get to write posts in Markdown as well.&#xA;My previous posts consider reverse engineering minesweeper for a end-product of forcing every cell in a board to contain a mine.</description>
     </item>
-    
     <item>
       <title>Reversing and Patching Minesweeper Part 2 -- Advanced Modifications</title>
       <link>https://merrittlj.github.io/posts/minesweeper2/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://merrittlj.github.io/posts/minesweeper2/</guid>
-      <description>Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.
-We do a little trolling. Going back to the Part 1 As a little refresher, in the second article we searched through Minesweeper’s code, and found where mines are randomly created, and where the timer started ticking.</description>
+      <description>Hello readers, and welcome to the third article in this series. In this article, we will be using our knowledge of Minesweeper’s code to make more advanced modifications, such as making all of the tiles mines.&#xA;We do a little trolling. Going back to the Part 1 As a little refresher, in the second article we searched through Minesweeper’s code, and found where mines are randomly created, and where the timer started ticking.</description>
     </item>
-    
     <item>
       <title>Reversing and Patching Minesweeper Part 1 -- Installation and Basic Modification</title>
       <link>https://merrittlj.github.io/posts/minesweeper1/</link>
       <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://merrittlj.github.io/posts/minesweeper1/</guid>
-      <description>Hello readers, and welcome to the second article in this series. In this article, we will be installing Ghidra and setting up our project, then we will make some basic modifications to our target program. Grab a cup of coffee and be prepared to down it, because this is a long one.
-Time for our first modification! Ghidra Installation Once you have navigated to the link from the first article(you can also find it here), you will see the following page:</description>
+      <description>Hello readers, and welcome to the second article in this series. In this article, we will be installing Ghidra and setting up our project, then we will make some basic modifications to our target program. Grab a cup of coffee and be prepared to down it, because this is a long one.&#xA;Time for our first modification! Ghidra Installation Once you have navigated to the link from the first article(you can also find it here), you will see the following page:</description>
     </item>
-    
     <item>
       <title>Reversing and Patching Minesweeper Part 0 -- Introduction</title>
       <link>https://merrittlj.github.io/posts/minesweeper0/</link>
       <pubDate>Tue, 02 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://merrittlj.github.io/posts/minesweeper0/</guid>
-      <description>Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be Reverse Engineering a basic, old Windows Minesweeper binary and creating custom patches for our desired functionality.
-This is going to be a fun series. My goal for this series There are many different reasons why I’m starting this series. However, in general, besides having fun, this is meant to be a well documented, easy introduction to Reverse Engineering binaries as a whole; and some of this knowledge can even be used outside of this topic.</description>
+      <description>Hello readers, and welcome to my first article I’ve wrote and the first in this series. In this series we will be Reverse Engineering a basic, old Windows Minesweeper binary and creating custom patches for our desired functionality.&#xA;This is going to be a fun series. My goal for this series There are many different reasons why I’m starting this series. However, in general, besides having fun, this is meant to be a well documented, easy introduction to Reverse Engineering binaries as a whole; and some of this knowledge can even be used outside of this topic.</description>
     </item>
-    
   </channel>
 </rss>
