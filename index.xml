@@ -6,14 +6,28 @@
     <description>Recent content on </description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Dec 2024 20:21:48 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 27 Dec 2024 18:04:00 -0700</lastBuildDate>
     <atom:link href="https://merrittlj.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Raven Smartwatch - Hardware</title>
+      <link>https://merrittlj.github.io/posts/raven-hardware/</link>
+      <pubDate>Fri, 27 Dec 2024 18:04:00 -0700</pubDate>
+      <guid>https://merrittlj.github.io/posts/raven-hardware/</guid>
+      <description>GitHub profile raven-hardware repository schematic pdf parts spreadsheet&#xA;Hardware This is the third post regarding my current project, the Raven smartwatch. In this post, I will be discussing the general hardware design and choices, as well as the lower-level aspects of the hardware.&#xA;Initial choices Overall, my main driving aspects of the hardware were to only use necessary components, removing unused or unnecessary components for a project like this(ex: some sort of speaker/audio output).</description>
+    </item>
+    <item>
+      <title>Raven Smartwatch - Software</title>
+      <link>https://merrittlj.github.io/posts/raven-software/</link>
+      <pubDate>Fri, 27 Dec 2024 18:04:00 -0700</pubDate>
+      <guid>https://merrittlj.github.io/posts/raven-software/</guid>
+      <description>GitHub profile raven(embedded software) repository raven-gb(GadgetBridge) repository&#xA;Software This is the second blog post out of multiple that I am posting regarding my project, the Raven smartwatch. See the first article for a broader introduction on this project, to fully understand the usage of the technologies introduced here. By the way, all of the software and hardware of this project are open-source.&#xA;Technologies The smartwatch side This project is built using a collection of technologies which I have selected through research and previous usages within other projects.</description>
+    </item>
     <item>
       <title>Raven Smartwatch - Design</title>
       <link>https://merrittlj.github.io/posts/raven-design/</link>
       <pubDate>Tue, 24 Dec 2024 20:21:48 -0700</pubDate>
       <guid>https://merrittlj.github.io/posts/raven-design/</guid>
-      <description>Intro This is the first of multiple blog posts regarding a project I have been working on for the past few months. With this project (unlike previous projects) I have seriously attempted to plan, design, and document all aspects of the project during the phases of the project. In this post, I will discuss my thoughts on the design and planning of the project in its current stance. Posts regarding hardware, software, and UI/UX will follow shortly after this post.</description>
+      <description>GitHub profile&#xA;Intro This is the first of multiple blog posts regarding a project I have been working on for the past few months. With this project (unlike previous projects) I have seriously attempted to plan, design, and document all aspects of the project during the phases of the project. In this post, I will discuss my thoughts on the design and planning of the project in its current stance. Posts regarding hardware, software, and UI/UX will follow shortly after this post.</description>
     </item>
     <item>
       <title>An argument for openness</title>
